@@ -248,7 +248,7 @@ const ProtocolLayout = (props: ProtocolProps) => {
   useEffect(() => {
     // Cinematic reveal: natively scroll to the newly mounted protocol section 
     // immediately after the AnimatePresence wait duration completes and it is injected.
-    const scrollTimeout = setTimeout(() => {
+    setTimeout(() => {
       if (containerRef.current) {
         const offset = 80;
         const elementPos = containerRef.current.getBoundingClientRect().top;
