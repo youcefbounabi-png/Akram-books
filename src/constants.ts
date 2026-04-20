@@ -32,5 +32,8 @@ export const ALGERIAN_STATES = [
   "Illizi", "Bordj Bou Arréridj", "Boumerdès", "El Tarf", "Tindouf", "Tissemsilt", "El Oued",
   "Khenchela", "Souk Ahras", "Tipaza", "Mila", "Aïn Defla", "Naâma", "Aïn Témouchent",
   "Ghardaïa", "Relizane", "Timimoun", "Bordj Badji Mokhtar", "Ouled Djellal", "Béni Abbès",
-  "In Salah", "In Guezzam", "Touggourt", "Djanet", "El M'Ghair", "El Meniaa"
+  "In Salah", "In Guezzam", "Touggourt", "Djanet", "El M'Ghair", "El Meniaa",
+  "Aflou (Laghouat)", "Barika (Batna)", "El-Qantara (Biskra)", "Bir El Ater (Tébessa)", 
+  "El Aricha (Tlemcen)", "Ksar Chelala (Tiaret)", "Aïn Oussera (Djelfa)", "M’saâd (Djelfa)", 
+  "Ksar El Boukhari (Médéa)", "Boussaâda (M'Sila)", "El Abiodh Sidi Cheikh (El Bayadh)"
 ];

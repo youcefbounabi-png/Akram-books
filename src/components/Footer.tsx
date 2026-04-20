@@ -68,6 +68,7 @@ export default function Footer() {
               <li><Link to="/" className="hover:text-brand-red transition-colors">{tf.links.home}</Link></li>
               <li><Link to="/nutrition" className="hover:text-brand-red transition-colors">{t.nav.books} - {isRTL ? "التغذية" : "Nutrition"}</Link></li>
               <li><Link to="/training" className="hover:text-brand-red transition-colors">{t.nav.books} - {isRTL ? "التدريب" : "Training"}</Link></li>
+              <li><a href="https://akramcoach.com/" target="_blank" rel="noopener noreferrer" className="hover:text-brand-red transition-colors text-brand-red/80 font-medium">{isRTL ? "موقع التدريب الرئيسي" : "Main Coaching Website"}</a></li>
             </ul>
           </div>
 
