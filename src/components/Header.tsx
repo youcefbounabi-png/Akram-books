@@ -53,6 +53,10 @@ export default function Header() {
             {lang === 'en' ? 'TRAINING' : 'التدريب'}
           </Link>
 
+          <a href="https://akramcoach.com/" target="_blank" rel="noopener noreferrer" className="text-sm font-display font-bold uppercase tracking-widest text-[#00B4D8] hover:text-[#00B4D8]/80 transition-colors flex items-center gap-1">
+            {lang === 'en' ? 'MAIN SITE' : 'الموقع الرئيسي'}
+          </a>
+
           <div className="w-px h-4 bg-white/20 mx-2" />
 
           <button
@@ -103,10 +107,19 @@ export default function Header() {
 
             <Link 
               to="/training" 
-              className={`text-xl font-display font-bold uppercase tracking-widest px-2 py-1 border-b border-white/10 pb-6 ${location.pathname === '/training' ? 'text-brand-red' : 'text-white/70 hover:text-white'}`}
+              className={`text-xl font-display font-bold uppercase tracking-widest px-2 py-1 ${location.pathname === '/training' ? 'text-brand-red' : 'text-white/70 hover:text-white'}`}
             >
               {lang === 'en' ? 'Training Protocol' : 'بروتوكول التدريب'}
             </Link>
+            
+            <a 
+              href="https://akramcoach.com/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-xl font-display font-bold uppercase tracking-widest px-2 py-1 border-b border-white/10 pb-6 text-[#00B4D8] hover:text-[#00B4D8]/80 transition-colors"
+            >
+              {lang === 'en' ? 'Main Coaching Website' : 'موقع التدريب الرئيسي'}
+            </a>
 
             <Link
               to="/order"
