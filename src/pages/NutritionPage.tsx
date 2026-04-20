@@ -336,7 +336,6 @@ export default function NutritionPage() {
             loop
             playsInline
             preload="metadata"
-            poster={img2}
             className="absolute inset-0 w-full h-full object-cover object-top will-change-transform"
           >
             <source src={heroVideo} type="video/mp4" />
