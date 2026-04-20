@@ -120,7 +120,7 @@ const PeakVisual = ({ color, bookImg, isEn }: { color: string; bookImg: string; 
       transition={{ y: { duration: 4, repeat: Infinity, ease: 'easeInOut' }, default: { duration: 0.8, ease: 'easeOut' } }}
       className="relative z-10 mt-12">
       <div className="relative rotate-[5deg] h-[350px]">
-        <img src={bookImg} className="h-full w-auto object-contain filter drop-shadow-[0_0_40px_rgba(0,0,0,0.6)]" alt="Protocol Book" />
+        <img src={bookImg} loading="lazy" decoding="async" className="h-full w-auto object-contain filter drop-shadow-[0_0_40px_rgba(0,0,0,0.6)] will-change-transform" alt="Protocol Book" />
         <motion.div initial={{ scale: 0 }} whileInView={{ scale: 1 }} transition={{ delay: 0.3, type: 'spring' }} viewport={{ once: true }}
           className="absolute -top-6 -right-6 w-20 h-20 rounded-full bg-black border-2 flex items-center justify-center rotate-12 z-20 shadow-xl"
           style={{ borderColor: color }}>
@@ -375,7 +375,9 @@ const ProtocolLayout = (props: ProtocolProps) => {
             <img
               src={coachImg}
               alt="Coach"
-              className="absolute inset-0 w-full h-full z-10"
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 w-full h-full z-10 will-change-transform"
               style={{
                 objectFit: 'cover',
                 objectPosition: 'left center',
@@ -495,7 +497,7 @@ const ProtocolLayout = (props: ProtocolProps) => {
       {/* Mobile Coach Image Panel (Relocated below What's Inside) */}
       <div className="md:hidden relative w-full h-[320px] -mb-16 z-20">
         <div className="absolute inset-0 z-0 bg-[#050505]" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 90%, 0 100%)' }}>
-          <img src={coachImg} alt="Coach" className="w-full h-full object-cover object-top" />
+          <img src={coachImg} alt="Coach" loading="lazy" decoding="async" className="w-full h-full object-cover object-top will-change-transform" />
           
           {/* Teal Glow */}
           <div className="absolute inset-0 pointer-events-none mix-blend-overlay opacity-20" style={{ backgroundColor: color }} />
@@ -732,11 +734,11 @@ const ProtocolLayout = (props: ProtocolProps) => {
 
         {/* Book — mobile: stacked below text; desktop: absolute side panel */}
         <div className={`md:hidden w-full flex items-center justify-center pointer-events-none opacity-40 mt-4 mb-8 relative z-10`}>
-          <img src={bookImg} className={`${prefix}-cta-book h-[35vh] object-contain -rotate-6 filter opacity-0`}
+          <img src={bookImg} loading="lazy" decoding="async" className={`${prefix}-cta-book h-[35vh] object-contain -rotate-6 filter opacity-0 will-change-transform`}
             style={{ filter: `drop-shadow(0 0 60px ${color}90)` }} alt="Protocol book" />
         </div>
         <div className={`hidden md:flex md:w-1/2 h-full absolute top-0 ${isRTL ? 'left-0' : 'right-0'} pointer-events-none items-center justify-end z-10 opacity-80`}>
-          <img src={bookImg} className={`${prefix}-cta-book h-[85vh] object-contain rotate-6 filter opacity-0 relative z-10`}
+          <img src={bookImg} loading="lazy" decoding="async" className={`${prefix}-cta-book h-[85vh] object-contain rotate-6 filter opacity-0 relative z-10 will-change-transform`}
             style={{ filter: `drop-shadow(0 0 80px ${color}90)` }} alt="Protocol book CTA" />
         </div>
 

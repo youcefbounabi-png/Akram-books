@@ -335,12 +335,13 @@ export default function NutritionPage() {
             muted
             loop
             playsInline
+            preload="metadata"
             poster={img2}
-            className="absolute inset-0 w-full h-full object-cover object-top"
+            className="absolute inset-0 w-full h-full object-cover object-top will-change-transform"
           >
             <source src={heroVideo} type="video/mp4" />
             {/* Fallback for browsers that don't support video */}
-            <img src={img2} alt="Coach Akram — Nutrition Guide" className="w-full h-full object-cover object-top" />
+            <img src={img2} loading="lazy" decoding="async" alt="Coach Akram — Nutrition Guide" className="w-full h-full object-cover object-top will-change-transform" />
           </video>
 
           {/* Subtle dark gradient at bottom so it blends cleanly */}
@@ -362,7 +363,7 @@ export default function NutritionPage() {
             style={{ top: '12%', right: '8%', width: '110px', height: '110px', opacity: 0 }}
           >
             <div className="w-full h-full rounded-full overflow-hidden border-4 border-white shadow-[0_0_30px_rgba(212,67,42,0.7)]">
-              <img src={imgFood1} alt="Food" className="w-full h-full object-cover scale-125" />
+              <img src={imgFood1} alt="Food" loading="lazy" decoding="async" className="w-full h-full object-cover scale-125 will-change-transform" />
             </div>
             <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-[#ec3642] text-white text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full whitespace-nowrap">
               {isEn ? '100+ Recipes' : '+100 وصفة'}
@@ -376,7 +377,7 @@ export default function NutritionPage() {
             style={{ top: '42%', right: '4%', width: '90px', height: '90px', opacity: 0 }}
           >
             <div className="w-full h-full rounded-full overflow-hidden border-4 border-[#ec3642] shadow-[0_0_30px_rgba(212,67,42,0.5)]">
-              <img src={imgFood2} alt="Food" className="w-full h-full object-cover scale-110" />
+              <img src={imgFood2} alt="Food" loading="lazy" decoding="async" className="w-full h-full object-cover scale-110 will-change-transform" />
             </div>
           </div>
 
@@ -387,7 +388,7 @@ export default function NutritionPage() {
             style={{ bottom: '20%', right: '9%', width: '75px', height: '75px', opacity: 0 }}
           >
             <div className="w-full h-full rounded-full overflow-hidden border-[3px] border-white/70 shadow-[0_0_20px_rgba(0,0,0,0.5)]">
-              <img src={img5} alt="Food" className="w-full h-full object-cover object-top scale-150" />
+              <img src={img5} alt="Food" loading="lazy" decoding="async" className="w-full h-full object-cover object-top scale-150 will-change-transform" />
             </div>
           </div>
         </div>
@@ -504,7 +505,7 @@ export default function NutritionPage() {
               <div className="flex -space-x-2">
                 {[img4, img5, imgFood1].map((src, i) => (
                   <div key={i} className="w-8 h-8 rounded-full overflow-hidden border-2 border-white/70" style={{ zIndex: 3 - i }}>
-                    <img src={src} alt="" className="w-full h-full object-cover object-top" />
+                    <img src={src} loading="lazy" decoding="async" alt="" className="w-full h-full object-cover object-top" />
                   </div>
                 ))}
               </div>

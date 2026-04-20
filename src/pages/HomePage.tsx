@@ -79,6 +79,7 @@ export default function HomePage() {
             src={booksHero}
             alt="Akram Books Collection"
             loading="eager"
+            decoding="async"
             className="w-full object-cover object-center block will-change-transform scale-[1.1]"
             style={{ height: '42vh' }}
           />
@@ -164,6 +165,7 @@ export default function HomePage() {
             src={booksHero}
             alt="Akram Books Collection"
             loading="eager"
+            decoding="async"
             className="absolute inset-0 w-full h-full object-cover object-center will-change-transform"
           />
           <div
