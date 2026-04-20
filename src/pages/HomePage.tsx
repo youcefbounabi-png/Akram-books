@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { useLanguage } from '../i18n/LanguageContext';
 import { Dumbbell, UtensilsCrossed } from 'lucide-react';
-import booksHero from '../assets/images/books-hero.png';
+import booksHero from '../assets/images/Gemini_Generated_Image_gc38fpgc38fpgc38.png';
 
 export default function HomePage() {
   const { t, isRTL, lang } = useLanguage();
