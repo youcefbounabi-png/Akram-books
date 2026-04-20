@@ -4,6 +4,29 @@ import gsap from 'gsap';
 import { useLanguage } from '../i18n/LanguageContext';
 import { BRAND, ALGERIAN_STATES } from '../constants';
 import { Truck, ChevronRight, ShieldCheck, Zap } from 'lucide-react';
+import algeriaCities from '../algeria-cities.json';
+
+const getCommunes = (stateName: string) => {
+  if (!stateName) return [];
+  const index = ALGERIAN_STATES.indexOf(stateName);
+  if (index === -1) return [];
+  
+  const parentWilayaMap: Record<number, number> = {
+    48: 0, 49: 0, 50: 6, 51: 7, 52: 10, 53: 10, 54: 29, 55: 32, 56: 38, 57: 46,
+    58: 2, 59: 4, 60: 6, 61: 11, 62: 12, 63: 13, 64: 16, 65: 16, 66: 25, 67: 27, 68: 31
+  };
+  
+  let targetIndex = index;
+  if (targetIndex >= 48) {
+    targetIndex = parentWilayaMap[targetIndex];
+  }
+  
+  const wilaya = (algeriaCities as any).wilayas[targetIndex];
+  if (!wilaya || !wilaya.dairas) return [];
+  
+  const allCommunes = wilaya.dairas.flatMap((d: any) => d.communes);
+  return allCommunes.sort((a: any, b: any) => a.name.localeCompare(b.name));
+};
 
 import nutritionBookImg from '../assets/images/nutrition-book-new.png';
 import mensBookImg from '../assets/images/mens-book.png';
@@ -58,6 +81,7 @@ export default function OrderFormPage() {
     lastName: '',
     phone: '',
     state: '',
+    district: '',
     address: '',
     bookChoice: 'bundle', // 'nutrition', 'training', 'bundle'
     genderVariant: 'male', // 'male', 'female'
@@ -99,6 +123,7 @@ export default function OrderFormPage() {
 *Name*: ${formData.firstName} ${formData.lastName}
 *Phone*: ${formData.phone}
 *State*: ${formData.state}
+*District*: ${formData.district}
 *Address*: ${formData.address}
 
 *Order Details*:
@@ -491,16 +516,28 @@ export default function OrderFormPage() {
                       {isEn ? "State (Wilaya)" : "الولاية"}
                     </label>
                     <select required className="w-full bg-transparent border-b border-white/10 px-0 py-3 text-white text-lg font-bold focus:outline-none focus:border-brand-red focus:shadow-[0_10px_10px_-10px_rgba(212,67,42,0.3)] transition-all cursor-pointer appearance-none"
-                            value={formData.state} onChange={e => setFormData({...formData, state: e.target.value})}>
+                            value={formData.state} onChange={e => setFormData({...formData, state: e.target.value, district: ''})}>
                       <option value="" className="bg-brand-dark">{isEn ? "Select State..." : "اختر الولاية..."}</option>
                       {ALGERIAN_STATES.map((w, i) => (
                         <option key={i} value={w} className="bg-brand-dark">{i+1} - {w}</option>
                       ))}
                     </select>
                   </div>
-                  <div className="md:col-span-2 relative group">
+                  <div className="relative group">
                     <label className={`absolute -top-6 ${isRTL ? 'right-0' : 'left-0'} text-[9px] font-black uppercase tracking-[0.2em] text-white/30 transition-colors group-focus-within:text-brand-red`}>
-                      {isEn ? "Full Address / District" : "العنوان الكامل / البلدية"}
+                      {isEn ? "District (Commune)" : "البلدية"}
+                    </label>
+                    <select required className="w-full bg-transparent border-b border-white/10 px-0 py-3 text-white text-lg font-bold focus:outline-none focus:border-brand-red focus:shadow-[0_10px_10px_-10px_rgba(212,67,42,0.3)] transition-all cursor-pointer appearance-none"
+                            value={formData.district} onChange={e => setFormData({...formData, district: e.target.value})} disabled={!formData.state}>
+                      <option value="" className="bg-brand-dark">{isEn ? "Select District..." : "اختر البلدية..."}</option>
+                      {getCommunes(formData.state).map((c: any, i: number) => (
+                        <option key={i} value={`${c.name} - ${c.name_ar}`} className="bg-brand-dark">{c.name} - {c.name_ar}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="md:col-span-2 relative group mt-2">
+                    <label className={`absolute -top-6 ${isRTL ? 'right-0' : 'left-0'} text-[9px] font-black uppercase tracking-[0.2em] text-white/30 transition-colors group-focus-within:text-brand-red`}>
+                      {isEn ? "Detailed Address" : "العنوان بالتفصيل"}
                     </label>
                     <input required type="text" className="w-full bg-transparent border-b border-white/10 px-0 py-3 text-white text-lg font-bold focus:outline-none focus:border-brand-red focus:shadow-[0_10px_10px_-10px_rgba(212,67,42,0.3)] transition-all"
                            value={formData.address} onChange={e => setFormData({...formData, address: e.target.value})} />

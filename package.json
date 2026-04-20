@@ -16,6 +16,7 @@
     "@splinetool/react-spline": "^4.1.0",
     "@splinetool/runtime": "^1.12.86",
     "@tailwindcss/vite": "^4.2.2",
+    "algeria-zones": "^1.0.0",
     "clsx": "^2.1.1",
     "gsap": "^3.15.0",
     "i18next": "^26.0.6",
