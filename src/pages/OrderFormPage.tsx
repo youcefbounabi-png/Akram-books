@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -71,10 +72,24 @@ const GrainOverlay = () => (
 export default function OrderFormPage() {
   const { lang, isRTL } = useLanguage();
   const isEn = lang === 'en';
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Derive initial values from URL params (?book=nutrition|training|bundle&variant=mens|womens)
+  const paramBook = searchParams.get('book'); // 'nutrition' | 'training' | 'bundle' | null
+  const paramVariant = searchParams.get('variant'); // 'mens' | 'womens' | null
+
+  const initialBookChoice =
+    paramBook === 'nutrition' ? 'nutrition'
+    : paramBook === 'training' ? 'training'
+    : paramBook === 'bundle' ? 'bundle'
+    : 'bundle';
+
+  const initialGender =
+    paramVariant === 'womens' ? 'female' : 'male';
 
   const [formData, setFormData] = useState({
     firstName: '',
@@ -83,10 +98,26 @@ export default function OrderFormPage() {
     state: '',
     district: '',
     address: '',
-    bookChoice: 'bundle', // 'nutrition', 'training', 'bundle'
-    genderVariant: 'male', // 'male', 'female'
+    bookChoice: initialBookChoice,
+    genderVariant: initialGender,
     quantity: 1,
   });
+
+  // Sync URL params to state when they change
+  useEffect(() => {
+    const book = searchParams.get('book');
+    const variant = searchParams.get('variant');
+    
+    if (book || variant) {
+      console.log('OrderForm: Syncing from URL params', { book, variant });
+      setFormData(prev => ({
+        ...prev,
+        bookChoice: (book === 'nutrition' || book === 'training' || book === 'bundle') ? book : prev.bookChoice,
+        genderVariant: variant === 'womens' ? 'female' : 'male'
+      }));
+    }
+  }, [searchParams]);
+
   const [hoveredBookIndex, setHoveredBookIndex] = useState<number | null>(null);
 
   const [isSubmitting, setIsSubmitting] = useState(false);

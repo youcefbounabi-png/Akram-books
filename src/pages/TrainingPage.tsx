@@ -5,7 +5,7 @@ import { ArrowRight, Trophy } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BRAND } from '../constants';
-import { buildWaUrl } from '../components/FloatingCTA';
+import { Link } from 'react-router-dom';
 
 import mensBookImg from '../assets/images/mens-book.png';
 import womensBookImg from '../assets/images/womens-book.png';
@@ -215,7 +215,7 @@ interface ProtocolProps {
   coachImg: string;
   prefix: string;
   phases: ReturnType<typeof mensPhases>;
-  whatsappMsg: string;
+  whatsappMsg?: string; // kept for backward-compat, no longer used for navigation
   who1: string;
   who2: string;
   who3: string;
@@ -237,7 +237,7 @@ interface ProtocolProps {
 const ProtocolLayout = (props: ProtocolProps) => {
   const {
     isEn, isRTL, color, accentGlass, bookImg, coachImg, prefix, phases,
-    whatsappMsg, who1, who2, who3,
+    who1, who2, who3,
     inside1, inside2, inside3, insideSub,
     ctaReady, ctaTo, ctaStart, ctaBuy,
     tickerText, decorWord, bgWord, features
@@ -339,7 +339,8 @@ const ProtocolLayout = (props: ProtocolProps) => {
     return () => ctx.revert();
   }, [isEn, isRTL, prefix, color]);
 
-  const waUrl = buildWaUrl(whatsappMsg);
+  // Build order URL: /order?book=training&variant=mens or womens
+  const orderUrl = `/order?book=training&variant=${prefix}`;
 
   return (
     <motion.div
@@ -712,7 +713,7 @@ const ProtocolLayout = (props: ProtocolProps) => {
             {isEn ? '4,000 DA' : '4000 دج'}
           </div>
 
-          <a href={waUrl} target="_blank" rel="noreferrer"
+          <Link to={orderUrl}
             className="relative group z-30 w-full md:w-auto"
             style={{ filter: `drop-shadow(0 0 20px ${color}50)` }}>
             <div className="relative px-6 py-4 md:py-4 overflow-hidden w-full">
@@ -723,11 +724,14 @@ const ProtocolLayout = (props: ProtocolProps) => {
               <div className={`absolute bottom-0 ${isRTL ? 'right-0' : 'left-0'} h-[5px] w-0 btn-line-${prefix} z-20 pointer-events-none`} style={{ backgroundColor: color }} />
               <div className="absolute inset-0 scale-y-0 origin-bottom group-hover:scale-y-100 transition-transform duration-500 z-0" style={{ backgroundColor: color }} />
             </div>
-          </a>
+          </Link>
 
           <div className="mt-6 md:mt-8 relative z-30">
             <p className={`text-white/40 text-sm md:text-base font-bold italic tracking-wide ${isRTL ? 'text-right' : 'text-left'}`}>
-              <span className="text-white/20">——</span> {isEn ? "Or get all 3 books for only 10,000 DA" : "أو احصل على الثلاثة كتب بـ 10,000 DA فقط"}
+              <span className="text-white/20">——</span>{' '}
+              <Link to="/order?book=bundle" className="hover:text-white/70 transition-colors underline-offset-2 hover:underline">
+                {isEn ? "Or get all 3 books for only 10,000 DA" : "أو احصل على الثلاثة كتب بـ 10,000 DA فقط"}
+              </Link>
             </p>
           </div>
         </div>
@@ -978,7 +982,7 @@ export default function TrainingPage({ onProtocolSelect }: { onProtocolSelect?: 
               ctaReady={isEn ? 'READY' : 'مستعد'}
               ctaTo={isEn ? 'TO' : 'للـ'}
               ctaStart={isEn ? 'START?' : 'انطلاق؟'}
-              ctaBuy={isEn ? 'BUY PROTOCOL' : 'اطلب عبر واتساب'}
+              ctaBuy={isEn ? 'GET THE PROTOCOL' : 'احصل على البروتوكول'}
               tickerText={isEn ? 'GET THE PROTOCOL • TRANSFORM YOUR BODY • 4000 DA • START TODAY • ' : 'احصل على البروتوكول • حوّل جسمك • 4000 DA • ابدأ اليوم • '}
               decorWord={isEn ? 'GO' : 'ابدأ'}
               bgWord={isEn ? 'EVOLUTION' : 'تطور'}
@@ -1008,7 +1012,7 @@ export default function TrainingPage({ onProtocolSelect }: { onProtocolSelect?: 
               ctaReady={isEn ? 'READY' : 'مستعدة'}
               ctaTo={isEn ? 'TO' : 'للـ'}
               ctaStart={isEn ? 'START?' : 'انطلاق؟'}
-              ctaBuy={isEn ? 'BUY PROTOCOL' : 'اطلبي عبر واتساب'}
+              ctaBuy={isEn ? 'GET THE PROTOCOL' : 'احصلي على البروتوكول'}
               tickerText={isEn ? 'GET THE PROTOCOL • SCULPT YOUR BODY • 4000 DA • START TODAY • ' : 'احصلي على البروتوكول • انحتي جسمك • 4000 DA • ابدئي اليوم • '}
               decorWord={isEn ? 'GO' : 'ابدئي'}
               bgWord={isEn ? 'TRANSFORM' : 'تحوّل'}

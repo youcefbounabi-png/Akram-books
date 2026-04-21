@@ -484,7 +484,7 @@ export default function NutritionPage() {
               </div>
 
               <Link
-                to="/order"
+                to="/order?book=nutrition"
                 className="group relative inline-flex items-center gap-3 text-white font-display font-bold uppercase tracking-widest text-sm overflow-hidden transition-all duration-300 hover:scale-[1.03] w-max"
                 style={{
                   backgroundColor: '#070707',
@@ -698,7 +698,7 @@ export default function NutritionPage() {
               </div>
 
               <Link 
-                to="/order" 
+                to="/order?book=nutrition" 
                 ref={magneticButtonRef}
                 onMouseMove={handleMagneticMove}
                 onMouseLeave={handleMagneticLeave}

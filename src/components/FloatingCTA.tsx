@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { ShoppingBag } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 
@@ -15,6 +15,9 @@ const WA_NUMBER = '213783766209';
 function buildWaUrl(message: string) {
   return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
 }
+
+// Motion-wrapped Link for animated navigation
+const MotionLink = motion(Link);
 
 export default function FloatingCTA({ trainingProtocol }: FloatingCTAProps) {
   const { t } = useLanguage();
@@ -40,32 +43,30 @@ export default function FloatingCTA({ trainingProtocol }: FloatingCTAProps) {
   let label = '';
   let pulseClass = '';
   let bgStyle = '';
-  let waUrl = '';
+  let orderTo = '';
 
   if (isNutrition) {
     label = t.home.stickyNutrition;
     pulseClass = 'cta-pulse-red';
     bgStyle = 'bg-brand-red';
-    waUrl = buildWaUrl(t.home.waMessageNutrition);
+    orderTo = '/order?book=nutrition';
   } else if (trainingProtocol === 'mens') {
     label = t.home.stickyMens;
     pulseClass = 'cta-pulse-teal';
     bgStyle = 'bg-[#00B4D8]';
-    waUrl = buildWaUrl(t.home.waMessageMens);
+    orderTo = '/order?book=training&variant=mens';
   } else if (trainingProtocol === 'womens') {
     label = t.home.stickyWomens;
     pulseClass = 'cta-pulse-pink';
     bgStyle = 'bg-[#FF006E]';
-    waUrl = buildWaUrl(t.home.waMessageWomens);
+    orderTo = '/order?book=training&variant=womens';
   }
 
   return (
     <AnimatePresence>
       {shouldShow && (
-        <motion.a
-          href={waUrl}
-          target="_blank"
-          rel="noopener noreferrer"
+        <MotionLink
+          to={orderTo}
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
@@ -86,7 +87,7 @@ export default function FloatingCTA({ trainingProtocol }: FloatingCTAProps) {
         >
           <ShoppingBag size={20} className="shrink-0" />
           <span>{label}</span>
-        </motion.a>
+        </MotionLink>
       )}
     </AnimatePresence>
   );
